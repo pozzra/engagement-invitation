@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ពិធីភ្ជាប់ពាក្យ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;500&family=Battambang:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f8e8f0 0%, #fce4ec 30%, #e8d5f5 70%, #dce8f8 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        #scaler {
+            width: 750px;
+            height: 480px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .card {
+            width: 750px;
+            height: 480px;
+            background: linear-gradient(145deg, #fff9fd 0%, #fef0fa 40%, #f5eeff 70%, #eef3ff 100%);
+            border-radius: 24px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(180,120,200,0.3), 0 10px 30px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            padding: 35px 50px;
+            opacity: 0;
+            transform: scale(0.9);
+            animation: cardEntrance 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes cardEntrance {
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* --- Decorations --- */
+        .corner { position: absolute; width: 160px; height: 160px; pointer-events: none; opacity: 0.7; }
+        .corner-tl { top:0; left:0; }
+        .corner-tr { top:0; right:0; transform: scaleX(-1); }
+        .corner-bl { bottom:0; left:0; transform: scaleY(-1); }
+        .corner-br { bottom:0; right:0; transform: scale(-1,-1); }
+
+        .couple-wrap {
+            position: absolute; right: 15px; bottom: 0;
+            width: 180px; height: 250px; opacity: 0.95;
+            transform: translateX(20px); opacity: 0;
+            animation: slideInLeft 1.2s ease 0.8s forwards;
+        }
+
+        @keyframes slideInLeft {
+            to { opacity: 0.95; transform: translateX(0); }
+        }
+
+        /* --- Animations --- */
+        .animate-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .delay-1 { animation-delay: 0.3s; }
+        .delay-2 { animation-delay: 0.5s; }
+        .delay-3 { animation-delay: 0.7s; }
+        .delay-4 { animation-delay: 0.9s; }
+
+        .content { position: relative; z-index: 2; width: calc(100% - 180px); }
+
+        .title-km {
+            font-family: 'Battambang', serif; font-size: 28px; font-weight: bold;
+            background: linear-gradient(135deg,#d4a017 0%,#f0c040 40%,#c8860a 70%,#e8b020 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 4px; filter: drop-shadow(0 2px 4px rgba(180,130,0,.2));
+        }
+
+        .title-en {
+            font-family: 'Cormorant Garamond', serif; font-size: 13px; font-weight: 500;
+            letter-spacing: 4px; color: #a07828; margin-bottom: 15px;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .title-en::before, .title-en::after { content:'❧'; color:#d4a017; }
+
+        .names {
+            font-family: 'Battambang', serif; font-size: 34px; font-weight: bold;
+            color: #c8860a; line-height: 1.2; margin-bottom: 8px;
+        }
+        .heart { color:#e05080; display: inline-block; animation: pulse 1.5s ease-in-out infinite; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+
+        .sub-title { font-family: 'Battambang', serif; font-size: 16px; color: #8860a0; margin-bottom: 15px; }
+
+        .gold-box {
+            border: 2px solid #d4a017; border-radius: 8px;
+            background: rgba(255,245,200,.4); width: 260px; height: 32px; 
+            margin-bottom: 15px; position: relative;
+        }
+
+        .separator {
+            width: 100%; height: 1px;
+            background: linear-gradient(to right,transparent,#d4a017,#f0c040,#d4a017,transparent);
+            margin-bottom: 15px; opacity: 0.6;
+        }
+
+        .details { font-family: 'Battambang', serif; font-size: 13px; color: #5a4070; line-height: 1.8; }
+        .detail-highlight { color:#a06820; font-weight:bold; }
+
+        /* --- QR Code Section --- */
+        .qr-section {
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .qr-code {
+            width: 70px;
+            height: 70px;
+            padding: 5px;
+            background: white;
+            border: 1px solid #d4a017;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(180,120,200,0.15);
+        }
+        .qr-text {
+            font-family: 'Battambang', serif;
+            font-size: 11px;
+            color: #a07828;
+            line-height: 1.4;
+        }
+
+        .sparkle {
+            position: absolute; width: 6px; height: 6px; background: #f0c040;
+            clip-path: polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
+            animation: twinkle 2.5s ease-in-out infinite;
+        }
+        @keyframes twinkle { 0%,100% { opacity:.3; transform:scale(.8); } 50% { opacity:1; transform:scale(1.2); } }
+    </style>
+</head>
+<body>
+
+<div id="scaler">
+    <div class="card">
+        <div class="corner corner-tl"><svg viewBox="0 0 155 155"><circle cx="18" cy="28" r="17" fill="#f4a0c0" opacity=".5"/><circle cx="43" cy="14" r="11" fill="#d090e0" opacity=".5"/><ellipse cx="48" cy="77" rx="21" ry="9" fill="#90c880" opacity=".3" transform="rotate(-30 48 77)"/></svg></div>
+        <div class="corner corner-tr"><svg viewBox="0 0 155 155"><circle cx="18" cy="28" r="17" fill="#f4a0c0" opacity=".5"/><circle cx="43" cy="14" r="11" fill="#d090e0" opacity=".5"/></svg></div>
+        <div class="corner corner-br"><svg viewBox="0 0 155 155"><circle cx="18" cy="128" r="19" fill="#ffb0c8" opacity=".5"/></svg></div>
+        <div class="corner corner-bl"><svg viewBox="0 0 155 155"><circle cx="18" cy="128" r="19" fill="#ffb0c8" opacity=".5"/></svg></div>
+
+        <div class="sparkle" style="top:20px; left:160px;"></div>
+        <div class="sparkle" style="top:40px; right:200px; animation-delay: 1s;"></div>
+
+        <div class="content">
+            <div class="title-km animate-in delay-1">សិរីសួស្តីពិធីភ្ជាប់ពាក្យ</div>
+            <div class="title-en animate-in delay-1">ENGAGEMENT INVITATION</div>
+
+            <div class="names animate-in delay-2">
+                គន់ អមរ៉ា <span class="heart">♥</span> ម៉េង ឆៃលាង
+            </div>
+
+            <div class="sub-title animate-in delay-2">សូមគោរពអញ្ជើញ</div>
+
+            <div class="gold-box animate-in delay-3"></div>
+            <div class="separator animate-in delay-3"></div>
+
+            <div class="details animate-in delay-4">
+                <div class="detail-row">
+                    ✦ <span class="detail-highlight">ថ្ងៃអាទិត្យ ទី០៣ ខែឧសភា ឆ្នាំ២០២៦</span>
+                </div>
+                <div class="detail-row">
+                    &nbsp;&nbsp;&nbsp;ចាប់ផ្តើម <span class="detail-highlight">ម៉ោង ០៤:០០ រសៀល</span>
+                </div>
+                <div style="margin-top: 5px;">
+                    ✦ ស្ថិតនៅគេហដ្ឋានខាងស្រី ភូមិ ភូមិចុង ឃុំ សំបូរ<br>
+                    &nbsp;&nbsp;&nbsp;ស្រុក បាធាយ ខេត្ត កំពង់ចាម
+                </div>
+            </div>
+
+            <div class="qr-section animate-in delay-4">
+                <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.google.com/maps/search/?api=1%26query=11.889177,104.913223" alt="Location QR Code">
+                <div class="qr-text">
+                    <strong>ស្កេនដើម្បីមើលទីតាំង</strong><br>
+                    Scan for Google Maps
+                </div>
+            </div>
+        </div>
+
+        <div class="couple-wrap">
+            <svg viewBox="0 0 170 235" fill="none">
+                <circle cx="82" cy="53" r="21" fill="#f5e0d0"/>
+                <rect x="63" y="72" width="40" height="78" rx="6" fill="#2a3a5a"/>
+                <circle cx="107" cy="50" r="20" fill="#f5ddc8"/>
+                <path d="M88 71 Q107 66 126 71 L136 228 Q107 242 78 228Z" fill="#f8f0ff"/>
+                <circle cx="80" cy="122" r="13" fill="#f4a0b8" opacity=".8"/>
+            </svg>
+        </div>
+    </div>
+</div>
+
+<script>
+    function scaleCard() {
+        const scaler = document.getElementById('scaler');
+        const availableWidth = window.innerWidth - 40;
+        const availableHeight = window.innerHeight - 40;
+        const scale = Math.min(1, availableWidth / 750, availableHeight / 480);
+        scaler.style.transform = `scale(${scale})`;
+    }
+    window.addEventListener('resize', scaleCard);
+    window.addEventListener('load', scaleCard);
+    scaleCard();
+</script>
+
+</body>
+</html>
