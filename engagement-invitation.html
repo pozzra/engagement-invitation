@@ -47,25 +47,24 @@
             to { opacity: 1; transform: scale(1); }
         }
 
-        /* --- Decorations --- */
-        .corner { position: absolute; width: 160px; height: 160px; pointer-events: none; opacity: 0.7; }
-        .corner-tl { top:0; left:0; }
-        .corner-tr { top:0; right:0; transform: scaleX(-1); }
-        .corner-bl { bottom:0; left:0; transform: scaleY(-1); }
-        .corner-br { bottom:0; right:0; transform: scale(-1,-1); }
-
+        /* --- New Modern Couple Style --- */
         .couple-wrap {
-            position: absolute; right: 15px; bottom: 0;
-            width: 180px; height: 250px; opacity: 0.95;
-            transform: translateX(20px); opacity: 0;
-            animation: slideInLeft 1.2s ease 0.8s forwards;
+            position: absolute; 
+            right: 40px; 
+            bottom: 40px;
+            width: 200px; 
+            height: 220px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideUpFade 1.2s ease 0.8s forwards;
+            z-index: 1;
         }
 
-        @keyframes slideInLeft {
-            to { opacity: 0.95; transform: translateX(0); }
+        @keyframes slideUpFade {
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- Animations --- */
+        /* --- Content & Text --- */
         .animate-in {
             opacity: 0;
             transform: translateY(20px);
@@ -81,7 +80,7 @@
         .delay-3 { animation-delay: 0.7s; }
         .delay-4 { animation-delay: 0.9s; }
 
-        .content { position: relative; z-index: 2; width: calc(100% - 180px); }
+        .content { position: relative; z-index: 2; width: calc(100% - 220px); }
 
         .title-km {
             font-family: 'Battambang', serif; font-size: 28px; font-weight: bold;
@@ -121,49 +120,18 @@
         .details { font-family: 'Battambang', serif; font-size: 13px; color: #5a4070; line-height: 1.8; }
         .detail-highlight { color:#a06820; font-weight:bold; }
 
-        /* --- QR Code Section --- */
-        .qr-section {
-            margin-top: 15px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+        .qr-section { margin-top: 15px; display: flex; align-items: center; gap: 12px; }
         .qr-code {
-            width: 70px;
-            height: 70px;
-            padding: 5px;
-            background: white;
-            border: 1px solid #d4a017;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(180,120,200,0.15);
+            width: 70px; height: 70px; padding: 5px; background: white;
+            border: 1px solid #d4a017; border-radius: 8px;
         }
-        .qr-text {
-            font-family: 'Battambang', serif;
-            font-size: 11px;
-            color: #a07828;
-            line-height: 1.4;
-        }
-
-        .sparkle {
-            position: absolute; width: 6px; height: 6px; background: #f0c040;
-            clip-path: polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
-            animation: twinkle 2.5s ease-in-out infinite;
-        }
-        @keyframes twinkle { 0%,100% { opacity:.3; transform:scale(.8); } 50% { opacity:1; transform:scale(1.2); } }
+        .qr-text { font-family: 'Battambang', serif; font-size: 11px; color: #a07828; }
     </style>
 </head>
 <body>
 
 <div id="scaler">
     <div class="card">
-        <div class="corner corner-tl"><svg viewBox="0 0 155 155"><circle cx="18" cy="28" r="17" fill="#f4a0c0" opacity=".5"/><circle cx="43" cy="14" r="11" fill="#d090e0" opacity=".5"/><ellipse cx="48" cy="77" rx="21" ry="9" fill="#90c880" opacity=".3" transform="rotate(-30 48 77)"/></svg></div>
-        <div class="corner corner-tr"><svg viewBox="0 0 155 155"><circle cx="18" cy="28" r="17" fill="#f4a0c0" opacity=".5"/><circle cx="43" cy="14" r="11" fill="#d090e0" opacity=".5"/></svg></div>
-        <div class="corner corner-br"><svg viewBox="0 0 155 155"><circle cx="18" cy="128" r="19" fill="#ffb0c8" opacity=".5"/></svg></div>
-        <div class="corner corner-bl"><svg viewBox="0 0 155 155"><circle cx="18" cy="128" r="19" fill="#ffb0c8" opacity=".5"/></svg></div>
-
-        <div class="sparkle" style="top:20px; left:160px;"></div>
-        <div class="sparkle" style="top:40px; right:200px; animation-delay: 1s;"></div>
-
         <div class="content">
             <div class="title-km animate-in delay-1">សិរីសួស្តីពិធីភ្ជាប់ពាក្យ</div>
             <div class="title-en animate-in delay-1">ENGAGEMENT INVITATION</div>
@@ -178,34 +146,30 @@
             <div class="separator animate-in delay-3"></div>
 
             <div class="details animate-in delay-4">
-                <div class="detail-row">
-                    ✦ <span class="detail-highlight">ថ្ងៃអាទិត្យ ទី០៣ ខែឧសភា ឆ្នាំ២០២៦</span>
-                </div>
-                <div class="detail-row">
-                    &nbsp;&nbsp;&nbsp;ចាប់ផ្តើម <span class="detail-highlight">ម៉ោង ០៤:០០ រសៀល</span>
-                </div>
-                <div style="margin-top: 5px;">
-                    ✦ ស្ថិតនៅគេហដ្ឋានខាងស្រី ភូមិ ភូមិចុង ឃុំ សំបូរ<br>
-                    &nbsp;&nbsp;&nbsp;ស្រុក បាធាយ ខេត្ត កំពង់ចាម
-                </div>
+                <div class="detail-row">✦ <span class="detail-highlight">ថ្ងៃអាទិត្យ ទី០៣ ខែឧសភា ឆ្នាំ២០២៦</span></div>
+                <div class="detail-row">&nbsp;&nbsp;&nbsp;ចាប់ផ្តើម <span class="detail-highlight">ម៉ោង ០៤:០០ រសៀល</span></div>
+                <div style="margin-top: 5px;">✦ ស្ថិតនៅគេហដ្ឋានខាងស្រី ភូមិ ភូមិចុង ឃុំ សំបូរ<br>&nbsp;&nbsp;&nbsp;ស្រុក បាធាយ ខេត្ត កំពង់ចាម</div>
             </div>
 
             <div class="qr-section animate-in delay-4">
-                <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.google.com/maps/search/?api=1%26query=11.889177,104.913223" alt="Location QR Code">
-                <div class="qr-text">
-                    <strong>ស្កេនដើម្បីមើលទីតាំង</strong><br>
-                    Scan for Google Maps
-                </div>
+                <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.google.com/maps/search/?api=1%26query=11.889177,104.913223" alt="QR Code">
+                <div class="qr-text"><strong>ស្កេនដើម្បីមើលទីតាំង</strong><br>Scan for Google Maps</div>
             </div>
         </div>
 
         <div class="couple-wrap">
-            <svg viewBox="0 0 170 235" fill="none">
-                <circle cx="82" cy="53" r="21" fill="#f5e0d0"/>
-                <rect x="63" y="72" width="40" height="78" rx="6" fill="#2a3a5a"/>
-                <circle cx="107" cy="50" r="20" fill="#f5ddc8"/>
-                <path d="M88 71 Q107 66 126 71 L136 228 Q107 242 78 228Z" fill="#f8f0ff"/>
-                <circle cx="80" cy="122" r="13" fill="#f4a0b8" opacity=".8"/>
+            <svg viewBox="0 0 200 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g transform="translate(40, 20)">
+                    <rect x="15" y="80" width="45" height="100" rx="12" fill="#2D3E50"/> <path d="M15 100 L37 80 L60 100" stroke="white" stroke-width="2" fill="none"/> <circle cx="37.5" cy="45" r="22" fill="#FFDBAC"/> <path d="M15 45 Q15 20 37.5 20 Q60 20 60 45" fill="#3D2B1F"/> <rect x="25" y="180" width="12" height="15" fill="#1A1A1A"/> <rect x="40" y="180" width="12" height="15" fill="#1A1A1A"/> </g>
+                <g transform="translate(95, 25)">
+                    <path d="M10 180 L35 70 L60 180 Z" fill="#F8F0FF" stroke="#E0D0F0" stroke-width="1"/> <path d="M10 180 Q35 195 60 180" fill="#F8F0FF"/> <circle cx="35" cy="40" r="20" fill="#FFE4C4"/> <path d="M10 40 Q10 10 35 10 Q60 10 60 40" fill="#4B3621"/> <path d="M15 110 Q35 125 55 110" stroke="#D0B0F0" stroke-width="2" fill="none"/> <path d="M15 30 Q35 0 55 30 L65 100 Q35 115 5 100 Z" fill="white" opacity="0.3"/>
+                </g>
+                <g transform="translate(85, 120)">
+                    <circle cx="5" cy="5" r="6" fill="#FFB7C5"/>
+                    <circle cx="12" cy="0" r="5" fill="#FFC0CB"/>
+                    <circle cx="0" cy="-2" r="5" fill="#F4C2C2"/>
+                    <rect x="4" y="8" width="3" height="15" fill="#77DD77" transform="rotate(10)"/>
+                </g>
             </svg>
         </div>
     </div>
